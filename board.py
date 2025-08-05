@@ -2,10 +2,7 @@ import utils
 
 class Board:
     def __init__(self):
-        pass
-
-    grid = []
-
+        self.grid = []
     def init_board(self):
         self.grid = [[0 for _ in range(7)] for _ in range(6)] # columns == 7, rows == 6
     def show_board(self):

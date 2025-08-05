@@ -1,20 +1,32 @@
 import utils
 from board import Board
 
-if __name__ == "__main__":
-    utils.clear_screen()
-
+def select_gamemode():
     while True:
         is_bot = input("Select game mode(duo/bot)")
         if is_bot == "duo":
             is_bot = False
-            break
+            return is_bot
         elif is_bot == "bot":
             is_bot = True
-            break
+            return is_bot
         else:
             print("Not valid!")
 
+def get_col(turn):
+    while True:
+        col = input(f"{turn}, insert the column you want to fill(1-7)\n")
+        if col in ['1', '2', '3', '4', '5', '6', '7']:
+            col = int(col) - 1
+            return col
+        else:
+            print("Not valid!")
+
+if __name__ == "__main__":
+    utils.clear_screen()
+
+    is_bot = select_gamemode()
+    
     board = Board()
     board.init_board()
     board.show_board()
@@ -23,13 +35,7 @@ if __name__ == "__main__":
 
     if is_bot == False:
         while board.check_win(1) == False and board.check_win(2) == False:
-            while True: # Keeps prompting the user until a valid value is received
-                col = input(f"{turn}, insert the column you want to fill(1-7)\n")
-                if col in ['1', '2', '3', '4', '5', '6', '7']:
-                    col = int(col) - 1
-                    break
-                else:
-                    print("Not valid!")
+            col = get_col(turn)
             if board.place(col, turn) == True:
                 utils.clear_screen()
                 board.show_board()
@@ -49,13 +55,7 @@ if __name__ == "__main__":
     else:
         while board.check_win(1) == False and board.check_win(2) == False:
             if turn == "Player 1":
-                while True: # Keeps prompting the user until a valid value is received
-                    col = input(f"{turn}, insert the column you want to fill(1-7)\n")
-                    if col in ['1', '2', '3', '4', '5', '6', '7']:
-                        col = int(col) - 1
-                        break
-                    else:
-                        print("Not valid!")
+                col = get_col(turn)
             else:
                 col = board.bot_place()
             if board.place(col, turn) == True:
