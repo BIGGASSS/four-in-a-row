@@ -1,10 +1,7 @@
 import os
 import random
 
-def clear_screen():
-    """
-    AI GENERATED CODE
-    """
+def clear_screen(): # Clears the terminal screen
     # For Windows
     if os.name == 'nt':
         os.system('cls')
