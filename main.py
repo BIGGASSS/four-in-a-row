@@ -4,12 +4,12 @@ from board import Board
 utils.clear_screen()
 
 while True:
-    isBot = input("Select game mode(duo/bot)")
-    if isBot == "duo":
-        isBot = False
+    is_bot = input("Select game mode(duo/bot)")
+    if is_bot == "duo":
+        is_bot = False
         break
-    elif isBot == "bot":
-        isBot = True
+    elif is_bot == "bot":
+        is_bot = True
         break
     else:
         print("Not valid!")
@@ -20,7 +20,7 @@ board.show_board()
 
 turn = "Player 1"
 
-if isBot == False:
+if is_bot == False:
     while board.check_win(1) == False and board.check_win(2) == False:
         while True: # Keeps prompting the user until a valid value is received
             col = input(f"{turn}, insert the column you want to fill(1-7)\n")
