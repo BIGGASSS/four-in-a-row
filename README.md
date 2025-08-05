@@ -1,6 +1,6 @@
 # FOUR-IN-A-ROW
 
-A simple four in a row game implemented in Python.
+A simple four in a row game implemented in Python with both Player vs. Player and Player vs. Bot.
 
 ## Running
 
