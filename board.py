@@ -54,7 +54,12 @@ class Board:
                     return True
         return False
     def bot_place(self):
-        for i in [3, 2, 4, 1, 5, 0, 6]: # Prioritize columns in the middle
-            if self.deter_bottom(i) != -1:
-                return i
+        for i in range(7): # Place if possible to win in 1 step
+            if self.deter_bottom(i) != -1: # Temporarily place bot's piece
+                row = self.deter_bottom(i)
+                self.grid[row][i] = 2
+                if self.check_win(2):
+                    self.grid[row][i] = 0
+                    return i
+                self.grid[row][i] = 0
         return utils.rand_int(0, 6) # Fallback to random integer
