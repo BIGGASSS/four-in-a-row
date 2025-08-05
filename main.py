@@ -3,7 +3,7 @@ from board import Board
 
 def select_gamemode():
     while True:
-        is_bot = input("Select game mode(duo/bot)")
+        is_bot = input("Select game mode(duo/bot)").lower()
         if is_bot == "duo":
             is_bot = False
             return is_bot
