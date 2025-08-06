@@ -28,34 +28,42 @@ class Board:
         else:
             self.grid[self.deter_bottom(col)][col] = 2
         return True
-    def check_win(self, side):
+    def check_win(self, side, n):
         for row in range(6): # Horizontal
             for col in range(4):
-                if (self.grid[row][col] == side and self.grid[row][col + 1] == side 
-                    and self.grid[row][col + 2] == side and self.grid[row][col + 3] == side):
+                for i in range(n):
+                    if self.grid[row][col+i] != side:
+                        break
+                else:
                     return True
         for row in range(3): # Vertical 
             for col in range(7):
-                if (self.grid[row][col] == side and self.grid[row + 1][col] == side and 
-                    self.grid[row + 2][col] == side and self.grid[row + 3][col] == side):
+                for i in range(n):
+                    if self.grid[row+i][col] != side:
+                        break
+                else:
                     return True
         for row in range(3): # Top-left to bottom-right
             for col in range(4):
-                if (self.grid[row][col] == side and self.grid[row + 1][col + 1] == side and 
-                    self.grid[row + 2][col + 2] == side and self.grid[row + 3][col + 3] == side):
+                for i in range(n):
+                    if self.grid[row+i][col+i] != side:
+                        break
+                else:
                     return True
         for row in range(3): # Top-right to bottom-left
             for col in range(3, 7):
-                if (self.grid[row][col] == side and self.grid[row + 1][col - 1] == side and 
-                    self.grid[row + 2][col - 2] == side and self.grid[row + 3][col - 3] == side):
+                for i in range(n):
+                    if self.grid[row+i][col-i] != side:
+                        break
+                else:
                     return True
         return False
-    def bot_place(self):
+    def bot_place(self, n):
         for i in range(7): # Place if possible to win in 1 step
             if self.deter_bottom(i) != -1: # Temporarily place bot's piece
                 row = self.deter_bottom(i)
                 self.grid[row][i] = 2
-                if self.check_win(2):
+                if self.check_win(2, n):
                     self.grid[row][i] = 0
                     return i
                 self.grid[row][i] = 0
