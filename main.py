@@ -23,9 +23,11 @@ def get_col(turn):
 
 def get_n():
     while True:
-        n = input("Insert n for n in a row(3-5)\n")
+        n = input("Insert n for n in a row(3-5)\nDefault value: 4\n")
         if n in ['3', '4', '5']:
             return int(n)
+        elif n.strip() == "": # Only whitespace characters or Enter
+            return 4
         else:
             print("Not valid!")
 
