@@ -1,10 +1,14 @@
 import utils
 
+# Constants for readability
+ROWS = 6
+COLS = 7
+
 class Board:
     def __init__(self):
         self.grid = []
     def init_board(self):
-        self.grid = [[0 for _ in range(7)] for _ in range(6)] # columns == 7, rows == 6
+        self.grid = [[0 for _ in range(COLS)] for _ in range(ROWS)]
     def show_board(self):
         for i in range(len(self.grid)):
             print(self.grid[i])
@@ -14,11 +18,11 @@ class Board:
         if self.grid[0][col] != 0:
             return -1
         while tmp == 0:
-            if i < 6:
+            if i < ROWS:
                 tmp = self.grid[i][col]
                 i += 1
             else:
-                return 5
+                return ROWS - 1
         return i-2
     def place(self, col, turn):
         if self.deter_bottom(col) == -1:
@@ -29,29 +33,29 @@ class Board:
             self.grid[self.deter_bottom(col)][col] = 2
         return True
     def check_win(self, side, n):
-        for row in range(6): # Horizontal
-            for col in range(4):
+        for row in range(ROWS): # Horizontal
+            for col in range(COLS-n+1):
                 for i in range(n):
                     if self.grid[row][col+i] != side:
                         break
                 else:
                     return True
-        for row in range(3): # Vertical 
-            for col in range(7):
+        for row in range(ROWS-n+1): # Vertical 
+            for col in range(COLS):
                 for i in range(n):
                     if self.grid[row+i][col] != side:
                         break
                 else:
                     return True
-        for row in range(3): # Top-left to bottom-right
-            for col in range(4):
+        for row in range(ROWS-n+1): # Top-left to bottom-right
+            for col in range(COLS-n+1):
                 for i in range(n):
                     if self.grid[row+i][col+i] != side:
                         break
                 else:
                     return True
-        for row in range(3): # Top-right to bottom-left
-            for col in range(3, 7):
+        for row in range(ROWS-n+1): # Top-right to bottom-left
+            for col in range(COLS-n, COLS):
                 for i in range(n):
                     if self.grid[row+i][col-i] != side:
                         break
@@ -59,7 +63,7 @@ class Board:
                     return True
         return False
     def bot_place(self, n):
-        for i in range(7): # Place if possible to win in 1 step
+        for i in range(COLS): # Place if possible to win in 1 step
             if self.deter_bottom(i) != -1: # Temporarily place bot's piece
                 row = self.deter_bottom(i)
                 self.grid[row][i] = 2
