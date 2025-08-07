@@ -2,7 +2,7 @@ import utils
 from board import Board
 
 def select_gamemode():
-    while True:
+    while True: # Loops until a valid input is received
         is_bot = input("Select game mode(duo/bot)").lower()
         if is_bot == "duo":
             is_bot = False
@@ -14,7 +14,7 @@ def select_gamemode():
             print("Not valid!")
 
 def get_col(turn):
-    while True:
+    while True: # Loops until a valid input is received
         col = input(f"{turn}, insert the column you want to fill(1-7)\n")
         if col in ['1', '2', '3', '4', '5', '6', '7']:
             return int(col) - 1
@@ -22,7 +22,7 @@ def get_col(turn):
             print("Not valid!")
 
 def get_n():
-    while True:
+    while True: # Loops until a valid input is received
         n = input("Insert n for n in a row(3-5)\nDefault value: 4\n")
         if n in ['3', '4', '5']:
             return int(n)
@@ -43,8 +43,8 @@ if __name__ == "__main__":
 
     turn = "Player 1"
 
-    if is_bot == False:
-        while board.check_win(1, n) == False and board.check_win(2, n) == False:
+    if is_bot == False: # PvP Mode
+        while board.check_win(1, n) == False and board.check_win(2, n) == False: # Loops while no one wins
             col = get_col(turn)
             if board.place(col, turn) == True:
                 utils.clear_screen()
@@ -62,8 +62,8 @@ if __name__ == "__main__":
             print("Player 1 won!")
         else:
             print("Player 2 won!")
-    else:
-        while board.check_win(1, n) == False and board.check_win(2, n) == False:
+    else: # Bot Mode
+        while board.check_win(1, n) == False and board.check_win(2, n) == False: # Loops while no one wins
             if turn == "Player 1":
                 col = get_col(turn)
             else:
