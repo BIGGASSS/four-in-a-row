@@ -11,7 +11,13 @@ class Board:
         self.grid = [[0 for _ in range(COLS)] for _ in range(ROWS)]
     def show_board(self):
         for i in range(len(self.grid)):
-            print(self.grid[i])
+            for j in range(len(self.grid[i])):
+                if self.grid[i][j] == 0:
+                    print(" ", end=' ')
+                else:
+                    print(self.grid[i][j], end=' ')
+            print()
+        print('-------------\n1 2 3 4 5 6 7')
     def deter_bottom(self, col): # Determines the bottom of the columns
         tmp = 0
         i = 0
