@@ -34,6 +34,8 @@ Returns `True` if `side` is winning, `False` otherwise
 
 ### `bot_place(n: int) -> int`
 
+`n` is the win condition
+
 Makes the decisions for the bot
 
 If it is possible to win in the next step, it returns that step
