@@ -17,7 +17,7 @@ def get_col(turn):
     while True:
         col = input(f"{turn}, insert the column you want to fill(1-7)\n")
         if col in ['1', '2', '3', '4', '5', '6', '7']:
-            return int(col) -1
+            return int(col) - 1
         else:
             print("Not valid!")
 
