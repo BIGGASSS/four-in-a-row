@@ -81,8 +81,7 @@ four-in-a-row/
 ├── main.py          # Main game loop and user interface
 ├── board.py         # Board class with game logic
 ├── utils.py         # Utility functions (screen clearing, random numbers)
-├── README.md        # Project documentation
-└── __pycache__/     # Python bytecode cache
+└── README.md        # Project documentation    # Python bytecode cache
 ```
 
 ### Core Components
