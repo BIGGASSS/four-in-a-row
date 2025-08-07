@@ -2,35 +2,43 @@
 
 ## board.py
 
-### `init_board()`
+### `init_board() -> None`
 
 Initializes the 6x7 grid
 
-### `show_board()`
+### `show_board() -> None`
 
 Prints the grid
 
-### `deter_bottom(col)`
+### `deter_bottom(col: int) -> int`
 
 Determines the bottom of the columns from up to down (It would be more efficient in reverse but I'm too lazy to do that)
 
-### `place(col, turn)`
+Returns the bottom index of column `col`
+
+### `place(col: int, turn: string) -> bool`
 
 Places on `col`, `1` if `turn` is equal to `Player 1`, 2 otherwise
 
-### `check_win(side, n)`
+Returns `True` if successfully placed, `False` otherwise
+
+### `check_win(side: int, n: int) -> bool`
+
+`side` could be either `1` for `Player 1` or `2` for `Player 2`
 
 `n` is the win condition (so how many in a row to win)
 
 Supports horizontal, vertical, top left to bottom right and top right to bottom left
 
-### `bot_place(n)`
+Returns `True` if `side` is winning, `False` otherwise
+
+### `bot_place(n: int) -> int`
 
 Makes the decisions for the bot
 
-If it is possible to win in the next step, it takes that step
+If it is possible to win in the next step, it returns that step
 
-Otherwise it places in a random column
+Otherwise it returns a random column index
 
 ## main.py
 
@@ -40,10 +48,10 @@ Loops until either side of the `check_win()` function returns `True`
 
 ## utils.py
 
-### `clear_screen()`
+### `clear_screen() -> None`
 
 Clears the terminal screen
 
-### `rand_int(a, b)`
+### `rand_int(a: int, b: int) -> int`
 
 Returns a random integer between numbers `a` and `b` using the `random` package (inclusive)
