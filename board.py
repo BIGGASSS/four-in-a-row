@@ -6,8 +6,6 @@ COLS = 7
 
 class Board:
     def __init__(self):
-        self.grid = []
-    def init_board(self):
         self.grid = [[0 for _ in range(COLS)] for _ in range(ROWS)]
     def show_board(self):
         for i in range(len(self.grid)):

@@ -38,7 +38,6 @@ if __name__ == "__main__":
     is_bot = select_gamemode()
     
     board = Board()
-    board.init_board()
     board.show_board()
 
     turn = "Player 1"
