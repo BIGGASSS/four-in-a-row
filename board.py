@@ -36,35 +36,30 @@ class Board:
         else:
             self.grid[self.deter_bottom(col)][col] = 2
         return True
+    def _check_direction(self, row, col, side, n, row_delta, col_delta):
+        """Check if there are n consecutive pieces in a specific direction."""
+        for i in range(n):
+            new_row = row + i * row_delta
+            new_col = col + i * col_delta
+            if (new_row < 0 or new_row >= ROWS or
+                new_col < 0 or new_col >= COLS or
+                self.grid[new_row][new_col] != side):
+                return False
+        return True
     def check_win(self, side, n):
-        for row in range(ROWS): # Horizontal
-            for col in range(COLS-n+1):
-                for i in range(n):
-                    if self.grid[row][col+i] != side:
-                        break
-                else:
-                    return True
-        for row in range(ROWS-n+1): # Vertical 
+        """Check if the given side has n consecutive pieces in any direction."""
+        # Define the four directions: horizontal, vertical, diagonal down-right, diagonal down-left
+        directions = [
+            (0, 1),   # Horizontal: right
+            (1, 0),   # Vertical: down
+            (1, 1),   # Diagonal: down-right
+            (1, -1)   # Diagonal: down-left
+        ]
+        for row in range(ROWS):
             for col in range(COLS):
-                for i in range(n):
-                    if self.grid[row+i][col] != side:
-                        break
-                else:
-                    return True
-        for row in range(ROWS-n+1): # Top-left to bottom-right
-            for col in range(COLS-n+1):
-                for i in range(n):
-                    if self.grid[row+i][col+i] != side:
-                        break
-                else:
-                    return True
-        for row in range(ROWS-n+1): # Top-right to bottom-left
-            for col in range(COLS-n, COLS):
-                for i in range(n):
-                    if self.grid[row+i][col-i] != side:
-                        break
-                else:
-                    return True
+                for row_delta, col_delta in directions:
+                    if self._check_direction(row, col, side, n, row_delta, col_delta):
+                        return True
         return False
     def bot_place(self, n):
         for i in range(COLS): # Place if possible to win in 1 step
